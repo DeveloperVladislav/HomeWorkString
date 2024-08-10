@@ -1,4 +1,6 @@
-﻿namespace HomeWorkString
+﻿using System.Text.RegularExpressions;
+
+namespace HomeWorkString
 {
 	internal class Program
 	{
@@ -21,8 +23,8 @@
 			Console.WriteLine($"(strocaConcatMetod) - {strocaConcatMetod}");
 
 			//С помощью метода Join
-			string[] arrStroca = new string[] {text, strocaConcat, strocaConcatMetod };
-			string strocaJoinMethod = string.Join(" ",arrStroca);
+			string[] arrStroca = new string[] { text, strocaConcat, strocaConcatMetod };
+			string strocaJoinMethod = string.Join(" ", arrStroca);
 			Console.WriteLine($"(strocaJoinMethod) - {strocaJoinMethod}");
 
 			Console.WriteLine("\n---------------Compare--------------------------");
@@ -31,11 +33,11 @@
 			string s2 = "world";
 
 			int result = string.Compare(s1, s2);
-			if(result<0)
+			if (result < 0)
 			{
 				Console.WriteLine("Строка s1 перед строкой s2");
 			}
-			else if(result>0)
+			else if (result > 0)
 			{
 				Console.WriteLine("Строка s1 после строки s2");
 			}
@@ -78,10 +80,10 @@
 			s1 = s1.Insert(5, substring);
 			Console.WriteLine(s1);
 
-			
+
 			Console.WriteLine("\n---------------Remove--------------------------");
 			//Удалить часть строки
-			s1 = s1.Remove(0,3);
+			s1 = s1.Remove(0, 3);
 			Console.WriteLine(s1);
 
 			Console.WriteLine("\n---------------Replace--------------------------");
@@ -99,8 +101,33 @@
 			example = example.ToLower();
 			Console.WriteLine(example);
 
-			Console.WriteLine("\n-----------------------------------------");
+			Console.WriteLine("\n----------------Regex-------------------------");
+
+			//Проверка на валидность телефонного номера (Россия, Беларусь)
+			string pattern = @"(\+7|8|7)?[\s\-]?\(?[489][0-9]{2}\)?[\s\-]?[0-9]{3}[\s\-]?[0-9]{2}[\s\-]?[0-9]{2}|(\+375|375)?[\s\-]?\(?(29|33|44)\)?[\s\-]?[0-9]{3}[\s\-]?[0-9]{2}[\s\-]?[0-9]{2}";
+
+			Console.WriteLine("Введите номер телефона:");
+			string phoneNumber = Console.ReadLine();
+
+
+			if (Regex.IsMatch(phoneNumber, pattern))
+			{
+				Console.WriteLine("Номер телефона валидный");
+			}
+			else
+			{
+				Console.WriteLine("Номер телефона не валидный");
+			}
+
+			Console.WriteLine("\n----------------DateTime-------------------------");
+
+			Console.WriteLine(DateTime.Now);//текущая дата и время компьютера
+			Console.WriteLine(DateTime.UtcNow);//время по гринвичу
+			Console.WriteLine(DateTime.Today);//только текущая дата
+			Console.WriteLine($"s: {DateTime.Now:s}");////дата в классическом формате
+			Console.WriteLine(DateTime.Now.ToString("yyyy.dd.MM"));//дата в классическом формате
 
 		}
+		
 	}
 }
